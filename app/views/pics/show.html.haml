@@ -1,13 +1,21 @@
-= image_tag @pic.image.url
-%h1= @pic.title
-%p= @pic.description
-
-%p
-Picture by
-= @pic.user.email
-
-%br
-
-= link_to "back", root_path
-= link_to "edit", edit_pic_path
-= link_to "Delete", pic_path, method: :delete, data: { comfirm: "Are you sure?" }
+#pic_show.row
+  .col-md-6-md-offset-3
+    .panel.panel-default
+      .panel.heading.pic_image
+        = image_tag @pic.image.url
+      .panel-body    
+        %h1= @pic.title
+        %p= @pic.description
+        %p
+      .panel-footer
+        .row
+          .col-md-6
+            %p.user
+              by
+              = @pic.user.email
+              
+          .col.md-6
+            .btn-group.pull-right
+              - if user_signed_in?
+                = link_to "edit", edit_pic_path, class: "btn btn_info"
+                = link_to "Delete", pic_path, method: :delete, data: { comfirm: "Are you sure?" }, class: "btn btn_danger"
